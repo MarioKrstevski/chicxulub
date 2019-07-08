@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
-import SafetyIndicator from "./components/SafetyIndicator";
-import PotentuallyHazardousAsteroids from "./components/PotentuallyHazardousAsteroids";
-import FirstAsteroidThatHits from "./components/FirstAsteroidThatHits";
-import BiggestSmallestFastestSlowest from "./components/BiggestSmallestFastestSlowest";
-import BigAsteroidsList from "./components/BigAsteroidsList";
-import FastAsteroidsList from "./components/FastAsteroidsList";
+
+import {
+  SafetyIndicator,
+  PotentuallyHazardousAsteroids,
+  FirstAsteroidThatHits,
+  BiggestSmallestFastestSlowest,
+  BigAsteroidsList,
+  FastAsteroidsList
+} from "./components";
+
+import "./App.css";
 
 function App() {
   const yearRange = 2;
@@ -55,9 +60,10 @@ function App() {
     }
   });
 
-  const [bigAsteroids,setBigAsteroids] = useState([])
-  const [fastAsteroids,setFastAsteroids] = useState([])
+  const [bigAsteroids, setBigAsteroids] = useState([]);
+  const [fastAsteroids, setFastAsteroids] = useState([]);
 
+  // Run query to get asteroids
   useEffect(() => {
     fetch(FEED_URL)
       .then(function(response) {
@@ -68,7 +74,7 @@ function App() {
         setAsteroids(json);
       });
   }, []);
-
+  // Update states when above query completes
   useEffect(() => {
     if (asteroids) {
       const NEO = asteroids.near_earth_objects;
@@ -86,6 +92,8 @@ function App() {
 
       let sizeConsideredBig = 0.2 * 1000;
       let speedConsideredFast = 19.48;
+      let bigAsteroidsArray = [];
+      let fastAsteroidsArray = [];
 
       Object.entries(NEO).forEach(([key, value]) => {
         value.forEach(element => {
@@ -99,52 +107,53 @@ function App() {
             setFirstThatHits(element);
           }
 
-         
-
           if (asteroidApproachTime < firstHitTime) {
             firstHitTime = asteroidApproachTime;
             setFirstThatHits(element);
           }
 
           let asteroidAverageSize =
-          (Math.round(
-            element.estimated_diameter.meters.estimated_diameter_min * 1000
-          ) /
-            1000 +
-            Math.round(
-              element.estimated_diameter.meters.estimated_diameter_max * 1000
+            (Math.round(
+              element.estimated_diameter.meters.estimated_diameter_min * 1000
             ) /
-              1000) /
-          2;
+              1000 +
+              Math.round(
+                element.estimated_diameter.meters.estimated_diameter_max * 1000
+              ) /
+                1000) /
+            2;
 
-          if (biggestComparison < asteroidAverageSize){
+          if (biggestComparison < asteroidAverageSize) {
             biggestComparison = asteroidAverageSize;
             biggest = element;
           }
 
-          if (smallestComparison > asteroidAverageSize){
+          if (smallestComparison > asteroidAverageSize) {
             smallestComparison = asteroidAverageSize;
             smallest = element;
           }
 
-          if(asteroidAverageSize >= sizeConsideredBig){
-            setBigAsteroids([...bigAsteroids, element])
+          if (asteroidAverageSize >= sizeConsideredBig) {
+            bigAsteroidsArray.push(element);
           }
 
-          let asteroidSpeed = parseFloat(element.close_approach_data[0].relative_velocity.kilometers_per_second).toFixed(2);
-          
-          if (fastestComparison < asteroidSpeed){
+          let asteroidSpeed = parseFloat(
+            element.close_approach_data[0].relative_velocity
+              .kilometers_per_second
+          ).toFixed(2);
+
+          if (fastestComparison < asteroidSpeed) {
             fastestComparison = asteroidSpeed;
             fastest = element;
           }
 
-          if (slowestComparison > asteroidAverageSize){
+          if (slowestComparison > asteroidAverageSize) {
             smallestComparison = asteroidAverageSize;
             slowest = element;
           }
 
-          if(asteroidSpeed >= speedConsideredFast){
-            setFastAsteroids([...fastAsteroids, element])
+          if (asteroidSpeed >= speedConsideredFast) {
+            fastAsteroidsArray.push(element);
           }
         });
       });
@@ -155,14 +164,15 @@ function App() {
         slowest,
         biggest,
         smallest
-      })
+      });
       setPotentuallyHazardous(neoCount);
+      setBigAsteroids([...bigAsteroids, ...bigAsteroidsArray]);
+      setFastAsteroids([...fastAsteroids, ...fastAsteroidsArray]);
     }
   }, [asteroids]);
 
   return (
-    <div>
-    { console.log(bigAsteroids, fastAsteroids)}
+    <div className="wrapper">
       Asteroids app
       {asteroids ? (
         <div className="data">
@@ -171,7 +181,7 @@ function App() {
           <FirstAsteroidThatHits asteroid={firstThatHits} />
           <BiggestSmallestFastestSlowest stats={fourObjects} />
           <BigAsteroidsList list={bigAsteroids} />
-        <FastAsteroidsList list={fastAsteroids} />
+          <FastAsteroidsList list={fastAsteroids} />
         </div>
       ) : (
         <div> Loading Data From API </div>

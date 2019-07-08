@@ -1,0 +1,10 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+.wrapper{
+    width:minmax(600px, 80vw);
+    background: url(https://d1w9csuen3k837.cloudfront.net/Pictures/1280x720/8/3/5/131835_shutterstock_632041256_WV.jpg) no-repeat;
+    background-size: contain;
+}
