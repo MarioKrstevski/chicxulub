@@ -3,8 +3,8 @@ import SafetyIndicator from "./components/SafetyIndicator";
 import PotentuallyHazardousAsteroids from "./components/PotentuallyHazardousAsteroids";
 import FirstAsteroidThatHits from "./components/FirstAsteroidThatHits";
 import BiggestSmallestFastestSlowest from "./components/BiggestSmallestFastestSlowest";
-// import BigAsteroidsList from "./components/SafetyIndiBigAsteroidsListcator";
-// import FastAsteroidsList from "./components/FastAsteroidsList";
+import BigAsteroidsList from "./components/BigAsteroidsList";
+import FastAsteroidsList from "./components/FastAsteroidsList";
 
 function App() {
   const yearRange = 2;
@@ -55,6 +55,9 @@ function App() {
     }
   });
 
+  const [bigAsteroids,setBigAsteroids] = useState([])
+  const [fastAsteroids,setFastAsteroids] = useState([])
+
   useEffect(() => {
     fetch(FEED_URL)
       .then(function(response) {
@@ -80,6 +83,9 @@ function App() {
       let slowest = 0;
       let smallestComparison = 999999;
       let smallest = 0;
+
+      let sizeConsideredBig = 0.2 * 1000;
+      let speedConsideredFast = 19.48;
 
       Object.entries(NEO).forEach(([key, value]) => {
         value.forEach(element => {
@@ -120,8 +126,13 @@ function App() {
             smallestComparison = asteroidAverageSize;
             smallest = element;
           }
+
+          if(asteroidAverageSize >= sizeConsideredBig){
+            setBigAsteroids([...bigAsteroids, element])
+          }
+
           let asteroidSpeed = parseFloat(element.close_approach_data[0].relative_velocity.kilometers_per_second).toFixed(2);
-          console.log(asteroidSpeed)
+          
           if (fastestComparison < asteroidSpeed){
             fastestComparison = asteroidSpeed;
             fastest = element;
@@ -130,6 +141,10 @@ function App() {
           if (slowestComparison > asteroidAverageSize){
             smallestComparison = asteroidAverageSize;
             slowest = element;
+          }
+
+          if(asteroidSpeed >= speedConsideredFast){
+            setFastAsteroids([...fastAsteroids, element])
           }
         });
       });
@@ -147,6 +162,7 @@ function App() {
 
   return (
     <div>
+    { console.log(bigAsteroids, fastAsteroids)}
       Asteroids app
       {asteroids ? (
         <div className="data">
@@ -154,8 +170,8 @@ function App() {
           <PotentuallyHazardousAsteroids value={potentuallyHazardous} />
           <FirstAsteroidThatHits asteroid={firstThatHits} />
           <BiggestSmallestFastestSlowest stats={fourObjects} />
-          {/* <BigAsteroidsList />
-        <FastAsteroidsList /> */}
+          <BigAsteroidsList list={bigAsteroids} />
+        <FastAsteroidsList list={fastAsteroids} />
         </div>
       ) : (
         <div> Loading Data From API </div>
