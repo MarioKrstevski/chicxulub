@@ -1,9 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function PotentuallyHazardousAsteroids(props) {
+function PotentuallyHazardousAsteroids({ value }) {
   return (
     <div className="hazardousAsteroids">
-     <p> There are <span> {props.value}</span> potentually hazardous asteroids for the next week.</p>
+      <p>
+        There are <span> {value}</span> potentually hazardous asteroids for the
+        next week.
+      </p>
     </div>
   );
 }
+
+PotentuallyHazardousAsteroids.propTypes = {
+  value: PropTypes.number.isRequired
+};
+
+export default PotentuallyHazardousAsteroids;

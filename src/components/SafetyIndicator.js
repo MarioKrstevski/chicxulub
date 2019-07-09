@@ -1,17 +1,20 @@
-import React from 'react'
+import React from "react";
+import PropTypes from "prop-types";
 
+function SafetyIndicator({ danger }) {
+  return (
+    <div className="safetyIndicatorItem">
+      <h3>Safety Status</h3>
 
-export default function SafetyIndicator(props){
-    return (
-        <div className="safetyIndicatorItem">
-        <h3>Safety Status</h3>
-
-       { props.danger ? (
-            <div className="box red"> </div>
-        ) : (
-            <div className="box green"></div>
-        )}
-        </div>
-
-    )
+      {danger ? (
+        <div className="box red"> </div>
+      ) : (
+        <div className="box green" />
+      )}
+    </div>
+  );
 }
+SafetyIndicator.propTypes = {
+  danger: PropTypes.bool.isRequired
+};
+export default SafetyIndicator;

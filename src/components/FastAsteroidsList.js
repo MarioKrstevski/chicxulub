@@ -1,8 +1,14 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
-export default function FastAsteroidList(props) {
-  const listFastAsteroids = props.list.map(asteroid => (
-    <li key={asteroid.id}>{asteroid.name} </li>
+function ListItem(props) {
+  // Correct! There is no need to specify the key here:
+  return <li>{props.value}</li>;
+}
+
+ function FastAsteroidList({list}) {
+  const listFastAsteroids = list.map(asteroid => (
+    <ListItem key={asteroid.id} value={asteroid.name}/>
   ));
 
   return (
@@ -12,3 +18,9 @@ export default function FastAsteroidList(props) {
     </div>
   );
 }
+
+FastAsteroidList.propTypes = {
+  list:PropTypes.arrayOf(PropTypes.object).isRequired
+};
+
+export default FastAsteroidList;

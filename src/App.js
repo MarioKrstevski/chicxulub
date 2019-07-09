@@ -24,6 +24,8 @@ function App() {
   const endDateString = endDate.toISOString().slice(0, 10);
   const API_KEY = "KqFy81Vfwhv8CPaExrwDRSHEJAUw0Bd5hl1KSkar";
 
+  // route that provides data for near earth objects (max 7 days time frame)
+  // if end_date is left out, it defaults to 7 days from start_date
   const FEED_URL =
     "https://api.nasa.gov/neo/rest/v1/feed?start_date=" +
     startDateString +
@@ -32,10 +34,12 @@ function App() {
     "&api_key=" +
     API_KEY;
 
+  // route that gives all the data they have so far
   const BROWSE_URL =
     "https://api.nasa.gov/neo/rest/v1/neo/browse?page=1&size=40&api_key=" +
     API_KEY;
 
+  // some different API that has comet's data
   const DIFFERENT_URL =
     "https://ssd-api.jpl.nasa.gov/cad.api?www=1&nea-comet=Y&dist-max=0.05&fullname=true&date-min=" +
     startDateString +
@@ -59,7 +63,6 @@ function App() {
       name: "Smallest"
     }
   });
-
   const [bigAsteroids, setBigAsteroids] = useState([]);
   const [fastAsteroids, setFastAsteroids] = useState([]);
   const [safetyStatus, setSafetyStatus] = useState(false);
@@ -108,8 +111,6 @@ function App() {
             setFirstThatHits(element);
           }
 
-          
-
           let asteroidAverageSize =
             (Math.round(
               element.estimated_diameter.meters.estimated_diameter_min * 1000
@@ -153,15 +154,16 @@ function App() {
           if (asteroidSpeed >= speedConsideredFast) {
             fastAsteroidsArray.push(element);
           }
-          let orbitDistance = parseInt(element.close_approach_data[0].miss_distance.kilometers)
-          if (orbitDistance <= 5000){
+          let orbitDistance = parseInt(
+            element.close_approach_data[0].miss_distance.kilometers
+          );
+          if (orbitDistance <= 5000) {
             console.log(orbitDistance);
-            setSafetyStatus(true)
+            setSafetyStatus(true);
           }
         });
       });
 
-      // console.log(neoCount);
       setFourObjects({
         fastest,
         slowest,
@@ -176,7 +178,6 @@ function App() {
 
   return (
     <div className="wrapper">
-      Asteroids app
       {asteroids ? (
         <div className="data">
           <SafetyIndicator danger={safetyStatus} />

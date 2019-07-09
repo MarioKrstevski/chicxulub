@@ -1,8 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 
-export default function BigAsteroidList(props) {
-  const listBigAsteroids = props.list.map(asteroid => (
-    <li key={asteroid.id}>{asteroid.name} </li>
+function ListItem(props) {
+  return <li>{props.value}</li>;
+}
+
+function BigAsteroidList({ list }) {
+  const listBigAsteroids = list.map(asteroid => (
+    <ListItem key={asteroid.id} value={asteroid.name} />
   ));
 
   return (
@@ -12,3 +17,9 @@ export default function BigAsteroidList(props) {
     </div>
   );
 }
+
+BigAsteroidList.propTypes = {
+  list: PropTypes.arrayOf(PropTypes.object).isRequired
+};
+
+export default BigAsteroidList;

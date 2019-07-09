@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
 }
-body{
+body {
   background: linear-gradient(#5d5d5d, #060503);
   height: 100vh;
 }
@@ -15,6 +15,9 @@ body{
   margin: 0 auto;
   padding: 30px;
   box-sizing: border-box;
+}
+.wrapper h3{
+  
 }
 .wrapper::before {
   content: "";
@@ -35,16 +38,16 @@ body{
 
 .hazardousAsteroids {
   grid-area: hazard;
-    font-size: 17px;
-  padding:15px;
+  font-size: 17px;
+  padding: 15px;
   text-align: center;
   height: fit-content;
   align-self: center;
 }
 
-.hazardousAsteroids span{
-    font-size: 18px;
-    font-family: cursive;
+.hazardousAsteroids span {
+  font-size: 18px;
+  font-family: cursive;
 }
 .firstAsteroid {
   grid-area: first;
@@ -53,52 +56,49 @@ body{
 }
 
 .bsfs {
-    display:grid;
-    text-align: center;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-area: bsfs;
-    
+  display: grid;
+  text-align: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-area: bsfs;
 }
-.bsfs>p{
-    align-self: center;
+.bsfs > p {
+  align-self: center;
 }
 .baList {
   grid-area: baList;
 }
 
-.baList ul{
-    list-style-type: none;
+.baList ul {
+  list-style-type: none;
 }
 .baList h2 {
-    text-decoration: underline;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-decoration: underline;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-.baList ul li{ 
-    padding: 5px 5px;
+.baList ul li {
+  padding: 5px 5px;
 }
-.baList ul li:nth-child(odd){ 
-    background-color: rgba(136, 135, 134, 0.459);
+.baList ul li:nth-child(odd) {
+  background-color: rgba(136, 135, 134, 0.459);
 }
 
 .faList {
   grid-area: faList;
-
 }
 
 .faList h2 {
-    text-decoration: underline;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-decoration: underline;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-.faList ul{
-    list-style-type: none;
+.faList ul {
+  list-style-type: none;
 }
-.faList ul li{ 
-    padding: 5px 5px;
+.faList ul li {
+  padding: 5px 5px;
 }
-.faList ul li:nth-child(odd){ 
-    background-color: rgba(136, 135, 134, 0.459);
+.faList ul li:nth-child(odd) {
+  background-color: rgba(136, 135, 134, 0.459);
 }
-
 
 .data {
   position: relative;
@@ -111,33 +111,35 @@ body{
     "first  first  first  first"
     "bsfs   bsfs   bsfs   bsfs"
     "baList baList faList faList";
-    /* "baList baList faList faList"; */
-    /* "baList baList faList faList"; */
+  /* "baList baList faList faList"; */
+  /* "baList baList faList faList"; */
 }
-.faList ul, .baList ul {
-    overflow-y: scroll;
+.faList ul,
+.baList ul {
+  overflow-y: scroll;
 }
-.faList ul, .baList ul {
+.faList ul,
+.baList ul {
   overflow-y: scroll;
   height: 80%;
-  
 }
-.faList ul::-webkit-scrollbar, .baList ul::-webkit-scrollbar {
-    width: 0.8em;
+.faList ul::-webkit-scrollbar,
+.baList ul::-webkit-scrollbar {
+  width: 0.8em;
 }
-.faList ul::-webkit-scrollbar-track , .baList ul::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    border-radius: 15px;
-    margin-top: 10px;
-    height: 95%;
-    margin-bottom: 10px;
-
+.faList ul::-webkit-scrollbar-track,
+.baList ul::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  margin-top: 10px;
+  height: 95%;
+  margin-bottom: 10px;
 }
-.faList ul::-webkit-scrollbar-thumb, .baList ul::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    border-radius: 15px;
-    margin-top: 10px;
-
+.faList ul::-webkit-scrollbar-thumb,
+.baList ul::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 15px;
+  margin-top: 10px;
 
   outline: 1px solid slategrey;
 }
@@ -151,37 +153,37 @@ body{
   background-color: rgba(39, 38, 46, 0.8);
 }
 
-.data>div>*{
-    padding:8px;
+.data > div > * {
+  padding: 8px;
 }
-.safetyIndicatorItem{
-    justify-items: center;
-}
-
-.safetyIndicatorItem h3{
-    max-width: 40%;
-    text-overflow: clip;
-    margin-top: 5px;
-    margin-left: 10px;
-}
-.safetyIndicatorItem>*{
-    display:inline-block;
-    height: 100%;
+.safetyIndicatorItem {
+  justify-items: center;
 }
 
-.safetyIndicatorItem .box{
-    float: right;
-    width:18px;
-    height: 18px;
-    margin:7px;
-    margin-top: 15px;
-    margin-right: 15px;
-    border-radius: 50%;
+.safetyIndicatorItem h3 {
+  max-width: 40%;
+  text-overflow: clip;
+  margin-top: 5px;
+  margin-left: 10px;
 }
-.safetyIndicatorItem .red{
-   background-color: red;
+.safetyIndicatorItem > * {
+  display: inline-block;
+  height: 100%;
 }
 
-.safetyIndicatorItem .green{
-    background-color: green;
- }
+.safetyIndicatorItem .box {
+  float: right;
+  width: 18px;
+  height: 18px;
+  margin: 7px;
+  margin-top: 15px;
+  margin-right: 15px;
+  border-radius: 50%;
+}
+.safetyIndicatorItem .red {
+  background-color: red;
+}
+
+.safetyIndicatorItem .green {
+  background-color: green;
+}
