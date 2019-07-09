@@ -180,6 +180,7 @@ function App() {
     <div className="wrapper">
       {asteroids ? (
         <div className="data">
+          <h2 className="title"> Chicxulub the Asteroid Dashboard </h2>
           <SafetyIndicator danger={safetyStatus} />
           <PotentuallyHazardousAsteroids value={potentuallyHazardous} />
           <FirstAsteroidThatHits asteroid={firstThatHits} />
