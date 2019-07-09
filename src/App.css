@@ -33,17 +33,13 @@ body {
 .title{
   grid-area: title;
   margin-left: 50px;
+  padding-left: 50px;
   font-size: 23px;
   font-family: cursive;
-}
-.title{
-  content:"";
-  width:25;
-  height: 25;
   position: absolute;
-
   background: url(https://images.vexels.com/media/users/3/141843/isolated/lists/fd3ed44c374b2432154fe118c3ac9884-comet-speed-fall-danger.png) no-repeat;
   background-size: contain;
+  filter:
 }
 
 .safetyIndicatorItem {
