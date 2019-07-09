@@ -1,12 +1,14 @@
-import React from 'react';
+import React from "react";
 
+export default function BigAsteroidList(props) {
+  const listBigAsteroids = props.list.map(asteroid => (
+    <li key={asteroid.id}>{asteroid.name} </li>
+  ));
 
-export default function BigAsteroidList(props){
-
-    const listBigAsteroids =  props.list.map((asteroid)=> <li>{asteroid.name} </li> );
-
-    return <div>
-        <h2>Big Asteroids This Week</h2>
-        <ul>{listBigAsteroids}</ul>
+  return (
+    <div className="baList">
+      <h2>Big Asteroids This Week</h2>
+      <ul>{listBigAsteroids}</ul>
     </div>
+  );
 }

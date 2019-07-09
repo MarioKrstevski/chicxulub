@@ -8,10 +8,10 @@ export default function BiggestSmallestFastestSlowest(props){
     const fastest = props.stats.fastest.name;
     const slowest = props.stats.slowest.name;
 
-    return(<div>
-        <p>Biggest is {biggest} </p>
-        <p>Smallest is {smallest} </p>
-        <p>Fastest is {fastest} </p>
-        <p>Slowest is {slowest} </p>
+    return(<div className="bsfs">
+        <p>Biggest asteroid is {biggest} </p>
+        <p>Smallest asteroid is {smallest} </p>
+        <p>Fastest asteroid is {fastest} </p>
+        <p>Slowest asteroid is {slowest} </p>
     </div>)
 }

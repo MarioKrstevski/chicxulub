@@ -44,7 +44,7 @@ function App() {
 
   const [asteroids, setAsteroids] = useState(null);
   const [potentuallyHazardous, setPotentuallyHazardous] = useState(0);
-  const [firstThatHits, setFirstThatHits] = useState("");
+  const [firstThatHits, setFirstThatHits] = useState({});
   const [fourObjects, setFourObjects] = useState({
     fastest: {
       name: "Fastest"
@@ -62,6 +62,7 @@ function App() {
 
   const [bigAsteroids, setBigAsteroids] = useState([]);
   const [fastAsteroids, setFastAsteroids] = useState([]);
+  const [safetyStatus, setSafetyStatus] = useState(false);
 
   // Run query to get asteroids
   useEffect(() => {
@@ -107,10 +108,7 @@ function App() {
             setFirstThatHits(element);
           }
 
-          if (asteroidApproachTime < firstHitTime) {
-            firstHitTime = asteroidApproachTime;
-            setFirstThatHits(element);
-          }
+          
 
           let asteroidAverageSize =
             (Math.round(
@@ -155,6 +153,11 @@ function App() {
           if (asteroidSpeed >= speedConsideredFast) {
             fastAsteroidsArray.push(element);
           }
+          let orbitDistance = parseInt(element.close_approach_data[0].miss_distance.kilometers)
+          if (orbitDistance <= 5000){
+            console.log(orbitDistance);
+            setSafetyStatus(true)
+          }
         });
       });
 
@@ -176,7 +179,7 @@ function App() {
       Asteroids app
       {asteroids ? (
         <div className="data">
-          <SafetyIndicator />
+          <SafetyIndicator danger={safetyStatus} />
           <PotentuallyHazardousAsteroids value={potentuallyHazardous} />
           <FirstAsteroidThatHits asteroid={firstThatHits} />
           <BiggestSmallestFastestSlowest stats={fourObjects} />
